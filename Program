@@ -1,11 +1,41 @@
 #include<stdio.h>
+#include<stdbool.h>
+#include<math.h>
+#include<string.h>
+#include<stdlib.h>
+#include<unistd.h>
+struct page
+{
+	int frame;
+	char status;
+};
+int n;
+int j=0;
+page pages[10];
 main()
 {
 	printf("Page size:2KB");
 	printf("\nProgram size:5MB\n");
 	n=log2(5*pow(2,100)/2*pow(2,10));
-	for(int i=0;i<n;i++)
-    {	printf("\n\tPage table %d",n);
-    }
- }
-    
+	for(int i=0;i<n;i++)		//Complexity n
+    {
+    	page p;
+    	p.frame=rand()%100;
+    	if(j%2==0)
+    	{
+    		p.status='v'; 		
+		}
+		else
+		{
+			p.status='i';
+		}
+		pages[i]=p;
+		j++;
+	}
+	printf("\n\tPage table");
+	printf("\n\nFrame number\t\tStatus");
+	for(int i=0;i<n;i++)		//Complexity n
+	{
+	   printf("\n%d\t\t\t%c",pages[i].frame,pages[i].status);
+	}		//Total Complexity n
+}
